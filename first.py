@@ -49,13 +49,18 @@ def getUserXY(max_, who):
   y = inputCoord('Y', max_)
   return x, y
 
+def checklList(list_):
+  if list_.count(1) == 3 and len(list_):
+    return True
+  return False
+
 def checkWinner(x, y, who):
   ## проверка победы игрока
   who = getPlayer(who)
 
   # проверка строки
   checkRow = [1 for i, x in enumerate(arrSteps[y]) if x == who ]
-  if checkRow.count(1) == 3 and any(checkRow):
+  if checklList(checkRow):
     return True
 
   # проверка колонки
@@ -63,7 +68,7 @@ def checkWinner(x, y, who):
   for i in range(3):
     if arrSteps[i][x] == who:
       checkRow.append(1)
-  if checkRow.count(1) == 3 and len(checkRow):
+  if checklList(checkRow):
     return True
 
   # проверка диагонали 0,0 - 2,2
@@ -72,8 +77,8 @@ def checkWinner(x, y, who):
     for i in range(3):
       if arrSteps[i][i] == who:
         checkRow.append(1)
-  if checkRow.count(1) == 3 and len(checkRow):
-      return True
+  if checklList(checkRow):
+    return True
 
   # проверка диагонали 0,2 - 2,0
   checkRow.clear()
@@ -81,8 +86,8 @@ def checkWinner(x, y, who):
     for i in range(3):
       if arrSteps[2-i][i] == who:
         checkRow.append(1)
-  if checkRow.count(1) == 3 and len(checkRow):
-      return True
+  if checklList(checkRow):
+    return True
 
   return False
 
