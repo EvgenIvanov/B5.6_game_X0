@@ -113,14 +113,9 @@ def setBoard(iCol, workMode = 0):
     while isFree:
       x, y = workMode(iCol, who)
       if not arrSteps[y][x]:
-        if not step % 2:
-          arrSteps[y][x] = getPlayer(not who)
-          if step > 3:
-            has_winner = checkWinner(x, y, not who)
-        else:
-          arrSteps[y][x] = getPlayer(who)
-          if step > 3:
-            has_winner = checkWinner(x, y, who)
+        arrSteps[y][x] = getPlayer(who) #(not who)
+        if step > 3:
+          has_winner = checkWinner(x, y, who) #not who)
         isFree = False
 
     if step > 3:
@@ -129,14 +124,9 @@ def setBoard(iCol, workMode = 0):
     showBorder()
 
     if has_winner:
-      str_ = 'Поздравляем!\nВыиграл игок '
-      if not step % 2:
-        str_ += getPlayer(not who)
-      else:
-        str_ += getPlayer(who)
-      str_ += '\nGame OVER!'
-      print(str_)
+      print(f'Поздравляем!\nВыиграл игок {getPlayer(who)}\nGame OVER!')
       break
+    who = not who
   if not has_winner:
     print('0:0 ничья')
-setBoard(iCol, 1)
+setBoard(iCol, 12)
